@@ -86,6 +86,7 @@
         "fileName": "Tests\\WorkflowTestCaseTemplate.xaml"
       }
     ],
+    "modernBehavior": false,
     "saveToCloud": false
   },
   "expressionLanguage": "VisualBasic",
