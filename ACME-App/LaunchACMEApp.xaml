@@ -1,7 +1,7 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="LaunchACMEApp" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="LaunchACMEApp" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="in_password" Type="InArgument(x:String)" />
+    <x:Property Name="in_password" Type="InArgument(ss:SecureString)" />
     <x:Property Name="in_username" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
@@ -49,6 +49,7 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>System.Numerics</x:String>
+      <x:String>System.Security</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -109,9 +110,11 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="LaunchACMEApp" sap:VirtualizedContainerService.HintSize="860.0000000000001,1244" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="LaunchACMEApp" sap:VirtualizedContainerService.HintSize="1156,1060" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_ExtractedWorkItems" />
     </Sequence.Variables>
@@ -120,30 +123,58 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="550.4,1220.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap:VirtualizedContainerService.HintSize="500,1036.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="UnValidCredentials" />
+        <Variable x:TypeArguments="x:Boolean" Name="isUserLoggedIn" />
+      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="516.8,1137.6" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" Url="[in_Config(&quot;ACME_WebsiteURL&quot;).ToString()]">
+      <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="466.4,953.6" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" Url="[in_Config(&quot;ACME_WebsiteURL&quot;).ToString()]">
         <ui:OpenBrowser.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="483.2,988.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="483.20000000000005,1102.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <Sequence.Variables>
-                <Variable x:TypeArguments="x:Boolean" Name="isUserLoggedIn" />
+                <Variable x:TypeArguments="sd:DataTable" Name="dt_WI5WorkItems" />
               </Sequence.Variables>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="CheckIfUserIsLoggedIn - Invoke Workflow File (ACME-App\CheckIfUserIsLoggedIn.xaml)" sap:VirtualizedContainerService.HintSize="449.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ACME-App\CheckIfUserIsLoggedIn.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FillUserCredentials - Invoke Workflow File (ACME-App\FillUserCredentials.xaml)" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ACME-App\FillUserCredentials.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <OutArgument x:TypeArguments="x:Boolean" x:Key="out_isUserLoggedIn">[isUserLoggedIn]</OutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_username">[in_username]</InArgument>
+                  <InArgument x:TypeArguments="ss:SecureString" x:Key="in_password">[in_password]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Login - Invoke Workflow File (ACME-App\Login.xaml)" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ACME-App\Login.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="CheckUnvalidCredentials - Invoke Workflow File (ACME-App\CheckUnvalidCredentials.xaml)" sap:VirtualizedContainerService.HintSize="449.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ACME-App\CheckUnvalidCredentials.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <OutArgument x:TypeArguments="x:Boolean" x:Key="out_UnValidCredentials">[UnValidCredentials]</OutArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -152,28 +183,21 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:InvokeWorkflowFile>
-              <If Condition="[not isUserLoggedIn]" sap:VirtualizedContainerService.HintSize="449.6,560.8" sap2010:WorkflowViewState.IdRef="If_1">
+              <If Condition="[UnValidCredentials]" DisplayName="If unvalid credentials" sap:VirtualizedContainerService.HintSize="449.6,504" sap2010:WorkflowViewState.IdRef="If_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
                 <If.Then>
-                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,164.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_11">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FillUserCredentials - Invoke Workflow File (ACME-App\FillUserCredentials.xaml)" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ACME-App\FillUserCredentials.xaml">
-                      <ui:InvokeWorkflowFile.Arguments>
-                        <InArgument x:TypeArguments="x:String" x:Key="in_username">[in_username]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="in_password">[in_password]</InArgument>
-                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-                      </ui:InvokeWorkflowFile.Arguments>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:InvokeWorkflowFile>
-                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Login - Invoke Workflow File (ACME-App\Login.xaml)" sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ACME-App\Login.xaml">
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="HandleInvalidCredentials - Invoke Workflow File (ACME-App\HandleInvalidCredentials.xaml)" sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ACME-App\HandleInvalidCredentials.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
                         <scg:Dictionary x:TypeArguments="x:String, Argument" />
                       </ui:InvokeWorkflowFile.Arguments>
@@ -187,14 +211,13 @@
                   </Sequence>
                 </If.Then>
                 <If.Else>
-                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;user is already logged in&quot;]" />
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;Credentials are Valid&quot;]" />
                   </Sequence>
                 </If.Else>
               </If>
@@ -220,9 +243,23 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FilterDataTable - Invoke Workflow File (Shared\FilterDataTable.xaml)" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Shared\FilterDataTable.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_filtered">[dt_WI5WorkItems]</OutArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt">[dt_ExtractedWorkItems]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="filterColumnName">Type</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="filterColumnValue">WI5</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UploadWorkItemsToQueue - Invoke Workflow File (ACME-App\UploadWorkItemsToQueue.xaml)" sap:VirtualizedContainerService.HintSize="449.6,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ACME-App\UploadWorkItemsToQueue.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_WorkItemsDataTable">[dt_ExtractedWorkItems]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_WorkItemsDataTable">[dt_WI5WorkItems]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">

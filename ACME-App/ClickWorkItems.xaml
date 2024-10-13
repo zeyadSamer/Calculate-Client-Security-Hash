@@ -33,6 +33,9 @@
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>UiPath.Platform.SyncObjects</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -69,42 +72,74 @@
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="NavigateToWorkItems" sap:VirtualizedContainerService.HintSize="1172.8,456.44000000000005" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="NavigateToWorkItems" sap:VirtualizedContainerService.HintSize="1172.8,562.84" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="449.6,213.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap:VirtualizedContainerService.HintSize="483.2,444" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="WorkItemsButtonExists" />
+      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="416,130.4" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
-        <ui:Click.CursorPosition>
-          <ui:CursorPosition Position="Center">
-            <ui:CursorPosition.OffsetX>
-              <InArgument x:TypeArguments="x:Int32" />
-            </ui:CursorPosition.OffsetX>
-            <ui:CursorPosition.OffsetY>
-              <InArgument x:TypeArguments="x:Int32" />
-            </ui:CursorPosition.OffsetY>
-          </ui:CursorPosition>
-        </ui:Click.CursorPosition>
-        <ui:Click.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e2adce66-79f0-4d34-a68d-e70c99954f3e" InformativeScreenshot="c7b3c4f86fb8997de3bb12b1eb681447" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Dashboard' /&gt;&lt;webctrl aaname='                          Work Items' parentid='dashmenu' tag='BUTTON' /&gt;">
-            <ui:Target.TimeoutMS>
-              <InArgument x:TypeArguments="x:Int32" />
-            </ui:Target.TimeoutMS>
-            <ui:Target.WaitForReady>
-              <InArgument x:TypeArguments="ui:WaitForReady" />
-            </ui:Target.WaitForReady>
-          </ui:Target>
-        </ui:Click.Target>
-      </ui:Click>
+      <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="449.6,360.8" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="934ed9dd0208d0b9bcbb7d8e6f56f0e7" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Dashboard' /&gt;">
+        <ui:BrowserScope.Body>
+          <ActivityAction x:TypeArguments="x:Object">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,190.4" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="382.4,130.4" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e2adce66-79f0-4d34-a68d-e70c99954f3e" InformativeScreenshot="dc9b0a49622d3daa8695e18f6e047433" Selector="&lt;webctrl aaname='                          Work Items' parentid='dashmenu' tag='BUTTON' visibleinnertext=' Work Items' /&gt;">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+            </Sequence>
+          </ActivityAction>
+        </ui:BrowserScope.Body>
+      </ui:BrowserScope>
     </Sequence>
   </Sequence>
 </Activity>

@@ -86,9 +86,11 @@
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="860.0000000000001,808" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="1156,982.4" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="username" />
       <Variable x:TypeArguments="ss:SecureString" Name="password" />
@@ -100,7 +102,8 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Opening applications...&quot;]" />
-    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="ACME_LoginCredentials" CacheStrategy="None" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="416,175.2" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[password]" Username="[username]" />
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="ACME_LoginCredentials" CacheStrategy="None" DisplayName="Get Credential" FolderPath="zeyadsamer1806@gmail.com's workspace" sap:VirtualizedContainerService.HintSize="416,175.2" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[password]" Username="[username]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[username.ToString + password.ToString]" />
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="LaunchSHA1Website - Invoke Workflow File (SHA1GeneratorWebsite\LaunchSHA1Website.xaml)" sap:VirtualizedContainerService.HintSize="416,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SHA1GeneratorWebsite\LaunchSHA1Website.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
@@ -109,8 +112,8 @@
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="LaunchACMEApp - Invoke Workflow File (ACME-App\LaunchACMEApp.xaml)" sap:VirtualizedContainerService.HintSize="416,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ACME-App\LaunchACMEApp.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_password">[password.ToString]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_username">[username]</InArgument>
+        <InArgument x:TypeArguments="ss:SecureString" x:Key="in_password">[password]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_username">[username.toString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>

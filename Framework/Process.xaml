@@ -42,6 +42,7 @@
       <x:String>UiPath.UIAutomationCore.Contracts</x:String>
       <x:String>UiPath.Platform.SyncObjects</x:String>
       <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -100,7 +101,7 @@
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="860.0000000000001,891.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1156,1490.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="ExtractedClientID" />
       <Variable x:TypeArguments="x:String" Name="ExtractedClientName" />
@@ -112,9 +113,9 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
-    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="516.8,88" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
-    <If Condition="[in_TransactionItem.SpecificContent(&quot;Type&quot;).toString=&quot;WI5&quot;]" DisplayName="If work item type is WI5 " sap:VirtualizedContainerService.HintSize="516.8,529.6" sap2010:WorkflowViewState.IdRef="If_1">
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="595.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="595.2,88" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
+    <If Condition="[in_TransactionItem.SpecificContent(&quot;Type&quot;).toString=&quot;WI5&quot;]" DisplayName="If work item type is WI5 " sap:VirtualizedContainerService.HintSize="592,897.6" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -122,7 +123,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Then extract client details and hash it" sap:VirtualizedContainerService.HintSize="416,392" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Then extract client details and hash it" sap:VirtualizedContainerService.HintSize="558.4,734.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="ClientSecurityHash" />
           </Sequence.Variables>
@@ -132,7 +133,7 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OpenDetailsForWorkItem - Invoke Workflow File (ACME-App\OpenDetailsForWorkItem.xaml)" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ACME-App\OpenDetailsForWorkItem.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OpenDetailsForWorkItem - Invoke Workflow File (ACME-App\OpenDetailsForWorkItem.xaml)" sap:VirtualizedContainerService.HintSize="524.8,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ACME-App\OpenDetailsForWorkItem.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="WIID">[in_TransactionItem.SpecificContent("WIID").ToString()]</InArgument>
@@ -144,7 +145,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GetClientDetails - Invoke Workflow File (ACME-App\GetClientDetails.xaml)" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ACME-App\GetClientDetails.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GetClientDetails - Invoke Workflow File (ACME-App\GetClientDetails.xaml)" sap:VirtualizedContainerService.HintSize="524.8,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ACME-App\GetClientDetails.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <OutArgument x:TypeArguments="x:String" x:Key="out_ClientID">[ExtractedClientID]</OutArgument>
               <OutArgument x:TypeArguments="x:String" x:Key="out_ClientName">[ExtractedClientName]</OutArgument>
@@ -157,7 +158,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GenerateHashForClient - Invoke Workflow File (SHA1GeneratorWebsite\GenerateHashForClient.xaml)" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SHA1GeneratorWebsite\GenerateHashForClient.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GenerateHashForClient - Invoke Workflow File (SHA1GeneratorWebsite\GenerateHashForClient.xaml)" sap:VirtualizedContainerService.HintSize="524.8,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SHA1GeneratorWebsite\GenerateHashForClient.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_TextToHash">[String.Format("{0}-{1}-{2}",ExtractedClientID,ExtractedClientName,ExtractedClientCountry)]</InArgument>
               <OutArgument x:TypeArguments="x:String" x:Key="out_HashValue">[ClientSecurityHash]</OutArgument>
@@ -169,29 +170,52 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ClickUpdateWorkItems - Invoke Workflow File (ClickUpdateWorkItems.xaml)" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ClickUpdateWorkItems.xaml">
-            <ui:InvokeWorkflowFile.Arguments>
-              <scg:Dictionary x:TypeArguments="x:String, Argument" />
-            </ui:InvokeWorkflowFile.Arguments>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </ui:InvokeWorkflowFile>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FillWorkItemWithUpdates - Invoke Workflow File (ACME-App\FillWorkItemWithUpdates.xaml)" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ACME-App\FillWorkItemWithUpdates.xaml">
-            <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_HashValue">[ClientSecurityHash]</InArgument>
-            </ui:InvokeWorkflowFile.Arguments>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </ui:InvokeWorkflowFile>
-          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Close'" sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+          <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="524.8,456" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="2" RetryInterval="00:00:05">
+            <ui:RetryScope.ActivityBody>
+              <ActivityAction>
+                <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="483.2,248" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence sap:VirtualizedContainerService.HintSize="449.6,188" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ClickUpdateWorkItems - Invoke Workflow File (ClickUpdateWorkItems.xaml)" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ClickUpdateWorkItems.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:InvokeWorkflowFile.Arguments>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FillWorkItemWithUpdates - Invoke Workflow File (ACME-App\FillWorkItemWithUpdates.xaml)" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ACME-App\FillWorkItemWithUpdates.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HashValue">[ClientSecurityHash]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:InvokeWorkflowFile>
+                  </Sequence>
+                </Sequence>
+              </ActivityAction>
+            </ui:RetryScope.ActivityBody>
+            <ui:RetryScope.Condition>
+              <ActivityFunc x:TypeArguments="x:Boolean" />
+            </ui:RetryScope.Condition>
+          </ui:RetryScope>
+          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Close'" sap:VirtualizedContainerService.HintSize="524.8,48" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
             <ui:Click.CursorPosition>
               <ui:CursorPosition Position="Center">
                 <ui:CursorPosition.OffsetX>

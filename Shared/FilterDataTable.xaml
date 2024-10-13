@@ -1,11 +1,20 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="CheckIfUserIsLoggedIn" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="FilterDataTable" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_isUserLoggedIn" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="out_dt_filtered" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_dt" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="filterColumnName" Type="InArgument(x:String)" />
+    <x:Property Name="filterColumnValue" Type="InArgument(x:String)" />
   </x:Members>
+  <this:FilterDataTable.in_dt>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:FilterDataTable.in_dt>
+  <this:FilterDataTable.filterColumnValue>
+    <InArgument x:TypeArguments="x:String" />
+  </this:FilterDataTable.filterColumnValue>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap2010:WorkflowViewState.IdRef>CheckIfUserIsLoggedIn_1</sap2010:WorkflowViewState.IdRef>
+  <sap2010:WorkflowViewState.IdRef>FilterDataTable_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -32,11 +41,11 @@
       <x:String>System.Windows.Markup</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
-      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
       <x:String>System.Reflection</x:String>
-      <x:String>UiPath.Platform.SyncObjects</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -63,11 +72,9 @@
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
-      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
-      <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Console</AssemblyReference>
       <AssemblyReference>System.Security.Permissions</AssemblyReference>
@@ -75,63 +82,41 @@
       <AssemblyReference>System.ComponentModel</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Private.Uri</AssemblyReference>
-      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
-      <AssemblyReference>System.Memory.Data</AssemblyReference>
-      <AssemblyReference>System.Linq.Async</AssemblyReference>
-      <AssemblyReference>System.Collections</AssemblyReference>
-      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckIfUserIsLoggedIn" sap:VirtualizedContainerService.HintSize="1156,705.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="FilterDataTable" sap:VirtualizedContainerService.HintSize="1172.8,415.70399999999995" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="500.8,682.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap:VirtualizedContainerService.HintSize="467.2,188" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="467.2,599.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
-        <Sequence.Variables>
-          <Variable x:TypeArguments="x:String" Name="TabName" />
-        </Sequence.Variables>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="title" DisplayName="Get Attribute 'page tab'" sap:VirtualizedContainerService.HintSize="433.6,236.8" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
-          <ui:GetAttribute.Result>
-            <OutArgument x:TypeArguments="x:String">[TabName]</OutArgument>
-          </ui:GetAttribute.Result>
-          <ui:GetAttribute.Target>
-            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2a4a40ed-46d7-4185-9791-8d311eb1ec58" InformativeScreenshot="ece53e0538959d8976d8c657975e203c" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='ACME System 1 - Log In - Google Chrome' /&gt;">
-              <ui:Target.TimeoutMS>
-                <InArgument x:TypeArguments="x:Int32" />
-              </ui:Target.TimeoutMS>
-              <ui:Target.WaitForReady>
-                <InArgument x:TypeArguments="ui:WaitForReady" />
-              </ui:Target.WaitForReady>
-            </ui:Target>
-          </ui:GetAttribute.Target>
-        </ui:GetAttribute>
-        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[TabName]" />
-        <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_1">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:Boolean">[out_isUserLoggedIn]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:Boolean">[not TabName.ToLower().Contains("log in")]</InArgument>
-          </Assign.Value>
-        </Assign>
-      </Sequence>
+      <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[out_dt_filtered]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[in_dt.AsEnumerable().Where(Function(f) f(filterColumnName).ToString() = filterColumnValue).CopyToDataTable()]</InArgument>
+        </Assign.Value>
+      </Assign>
     </Sequence>
   </Sequence>
 </Activity>
